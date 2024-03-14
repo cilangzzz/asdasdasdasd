@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+<body>
+<style>
+    body{
+        background-color: #111;
+        font-family: 'helvetica', sans-serif;
+        margin-top: 14%;
+    }
+
+    h1 , p{
+        color: #fff;
+        font-size: 30px;
+    }
+
+    h1{
+        font-size: 60px;
+    }
+
+    span{
+        background-color: orange;
+        color: #000;
+        padding: 6px;
+        border-radius: 5px;
+    }
+
+    p{
+        letter-spacing: 15px;
+    }
+    .col{ margin: 0 auto; width: 40%;  position: relative; flex: 1;} /* necessary to give position: relative to parent. */
+    .row{display: flex;width: 40%;margin:0 auto;height:50px;overflow: hidden;margin-bottom: 10px}
+    .btn14{
+        width: 22%;
+        border-radius: 0px 14px 14px 0px;
+        background-color: orange;
+        padding: 14px;
+        margin: 0 auto;text-align: center;
+        color:black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:all  0.3s;
+        border: 0;
+        box-shadow: inset 0px 0px 0px #915e00;
+    }
+    .btn14:active{
+        transition:all  0.1s;
+        box-shadow: inset 5px 5px 60px #915e00,
+        inset -5px -5px 60px #ffec00;
+    }
+    input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
+    .effect-14{opacity: 0.5; height: 50px;border-radius: 14px 0px 0px 14px;border: 1px solid #ccc; padding: 7px 14px; transition: 0.4s; }
+    .focus-bg{padding: 0; }
+    .effect-14 ~ .focus-bg:before{border-radius: 14px 0px 0px 14px;content: ""; position: absolute; left: 0; top: 0; width: 0; height: 0; background-color: orange; transition: 0.3s; z-index: -1;}
+    .effect-14 ~ .focus-bg:after{border-radius: 0px 0px 0px 0px;content: ""; position: absolute; left: 0; top: 0; width: 0; height: 0; background-color: orange; transition: 0.3s; z-index: -1;}
+    .effect-14:focus ~ .focus-bg:before{transition: 0.3s; width: 50%; height: 100%;}
+    .effect-14 ~ .focus-bg:after{left: auto; right: 0; top: auto; bottom: 0;}
+    .effect-14:focus ~ .focus-bg:after{transition: 0.3s; width: 50%; height: 100%;}
+    :focus{outline: none;}
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0px;
+        font-family: 'segoe ui';
+    }
+
+    .nav {
+        height: 50px;
+        width: 100%;
+        background-color: orange;
+        position: relative;
+    }
+
+    .nav > .nav-header {
+        display: inline;
+    }
+
+    .nav > .nav-header > .nav-title {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 22px;
+        color: black;
+        padding: 10px 10px 10px 10px;
+    }
+
+    .nav > .nav-btn {
+        display: none;
+    }
+
+    .nav > .nav-links {
+        display: inline;
+        float: right;
+        font-size: 20px;
+    }
+
+    .nav > .nav-links > a {
+        font-weight: bold;
+        display: inline-block;
+        padding: 13px 10px 13px 10px;
+        text-decoration: none;
+        color: black;
+        font-size: 24px;
+    }
+
+    .nav > .nav-links > a:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .nav > #nav-check {
+        display: none;
+    }
+
+    @media (max-width:600px) {
+        .nav{
+            z-index: 999;
+        }
+        .nav > .nav-btn {
+            display: inline-block;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+        .nav > .nav-btn > label {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            padding: 13px;
+        }
+        .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .nav > .nav-btn > label > span {
+            display: block;
+            width: 25px;
+            height: 10px;
+            border-top: 2px solid #eee;
+        }
+        .nav > .nav-links {
+            position: absolute;
+            display: block;
+            width: 100%;
+            background-color: #333;
+            height: 0px;
+            transition: all 0.3s ease-in;
+            overflow-y: hidden;
+            top: 50px;
+            left: 0px;
+        }
+        .nav > .nav-links > a {
+            display: block;
+            width: 100%;
+        }
+        .nav > #nav-check:not(:checked) ~ .nav-links {
+            height: 0px;
+        }
+        .nav > #nav-check:checked ~ .nav-links {
+            height: calc(100vh - 50px);
+            overflow-y: auto;
+        }
+    }
+</style>
+	<!-- <div class="nav">
+		<input type="checkbox" id="nav-check">
+		<div class="nav-header">
+			<div class="nav-title">
+				人员添加
+			</div>
+		</div>
+		<div class="nav-btn">
+			<label for="nav-check">
+				<span></span>
+				<span></span>
+				<span></span>
+			</label>
+		</div>
+
+	   
+	</div> -->
+	<center>
+	<h1>人员 <span>添加</span></h1>
+	<div class="row">
+	    <div class="col">
+	        <input id="tokenInput" data-parent class="effect-14" type="text" placeholder="Input Auth Token">
+	        <span class="focus-bg"></span>
+	    </div>
+	
+	    <button class="btn14" onclick="" >
+	        身份验证
+	    </button>
+	</div>
+	<form id="myForm">
+		
+		
+<!-- 		<p>community</p> -->
+		
+		
+		<div class="row">
+			<div class="col">
+				<input id="urlInput"  name="username" class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+
+			<button class="btn14" onclick="getParseLink()" >
+				姓名
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="id_number" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				身份证号
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="company_name" class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				公司名称
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="social_id" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				社保编号
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="sex" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				性别
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="unemployment_time" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				失业参保时间
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="unemployment_mon" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				  失业保险应缴月数  
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="unemployment_s_mon" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				 失业保险实缴月数 
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="unemployment_d_mon" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				 失业保险欠费月数 
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="work_injury_time" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				 工伤保险参保时间 
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="work_injury_mon" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				  工伤保险应缴月数  
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="work_injury_s_mon" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				  工伤保险实缴月数  
+			</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="urlInput" name="work_injury_d_mon" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+				<span class="focus-bg"></span>
+			</div>
+		
+			<button class="btn14" onclick="getParseLink()" >
+				  工伤保险欠费月数  
+			</button>
+		</div>
+
+		
+
+	
+	
+	</form>
+	</center>
+	<div class="row">
+		<!-- <div class="col">
+			<input id="urlOutput" data-parent class="effect-14" type="text" placeholder="Input Parse Link">
+			<span class="focus-bg"></span>
+		</div> -->
+	
+		<button class="btn14" onclick="AddPerson()">
+			添加
+		</button>
+	</div>
+</body>
+<script src="./jquery-3.6.0.min.js"></script>
+<script>
+   function AddPerson(){
+	   var formData = $('#myForm').serialize();
+	   console.log(formData);
+	   var tokenInput = document.getElementById('tokenInput');
+	   var token = tokenInput.value;
+	    // 使用$.post()方法发送POST请求
+	   $.post("/user/add_user?token=" + token, formData, function(response){
+		 // 处理服务器响应
+		 console.log(response);
+		 alert(response);
+	   });
+	   var form = document.getElementById("myForm");
+	   if (!form) {
+		   console.log("Form not found");
+		   return;
+	   }
+	
+		
+	 //   // 创建FormData对象并填充表单数据
+	 //   var formData = new FormData(form);
+	   
+	 //   console.log(token);
+	 //   // 发送POST请求
+	 //   console.log(formData);
+	 //   fetch(, {
+	 //       method: "POST",
+	 //       body: formData
+	 //   })
+	 //   .then(response => {
+	 //       if (!response.ok) {
+	 //           throw new Error('Network response was not ok');
+	 //       }
+		//    alert(response.text());
+	 //       return response.text();
+		   
+	 //   })
+	 //   .then(data => {
+	 //       console.log("Server response:", data);
+	 //   })
+	 //   .catch(error => {
+	 //       console.error('There has been a problem with your fetch operation:', error);
+	 //   });
+   }
+   
+
+    function getParseLink() {
+		return;
+       
+    }
+    
+    function Copy() {
+        
+    }
+	 document.getElementById("myForm").addEventListener("submit", function(event) {
+	            event.preventDefault(); // 阻止表单默认提交行为
+	
+	        });
+</script>
+</html>
